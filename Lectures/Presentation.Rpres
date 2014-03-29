@@ -1,0 +1,74 @@
+Presentation
+========================================================
+author: Måns Magnusson
+date: 29 mars 2014
+
+
+Målet för dagen
+========================================================
+
+- Mål 1. Pröva att använda R (programmering). 
+- Mål 2. Efter dagen kunna angripa ett statistisk problem. 
+- Mål 3. Ha kul!
+
+
+Material
+========================================================
+
+## Program
+Använd [R](http://www.r-project.org/) och [R-Studio](http://www.rstudio.com/).
+
+## R Reference card v.2
+Ett par sidor med viktiga funktioner i R. [[här]](http://cran.r-project.org/doc/contrib/Baggott-refcard-v2.pdf)
+
+## Videoföreläsningar
+- Google Developers (GD) videomaterial [[här]](http://www.youtube.com/watch?v=iffR3fWv4xw&list=PLyYlLs02rgBYRWBzYpoHz7m2SE8mEZ68w)
+- Roger Pengs föreläsningar (RP) [[här]](http://www.youtube.com/user/rdpeng/videos)
+
+
+Vad är R?
+========================================================
+- Populäraste programmeringsspråket för statistiker
+- Bygger på öppen källkod (gratis och transparent)
+- Många utvecklare - stor funktionalitet
+- Finns för Windows, Mac och Linux (och Solaris och ...)
+- Högnivåspråk
+- SAS och SPSS fortfarande större bland statistiker
+- Mer information i RP:s video "Overview and Background"
+
+
+Att söka hjälp
+====================================
+- Hjälpen i R 
+- Google, Google, Google
+- Stack overflow 
+- Sök på engelska
+- Sök / studera på felmeddelandet från R
+```{r,echo=FALSE,eval=TRUE}
+cat("Error in eval(expr, envir, enclos) : object 'x' not found")
+```
+- Mer information i RP:s video "How to get Help"
+
+Skillnader mot 'vad jag är van vid'
+========================================================
+## För programerare
+- Vektorisering
+- Skillnader mellan matrix och data.frame
+
+## För statistiker
+- Allt handlar inte om dataset och variabler
+ "Every procedure accepts variables."
+- Kan ha variabler som inte är dataset (och använda olika i samma regression)
+
+Installation av R och R-Studio
+========================================================
+## R
+1. Gå till [http://www.r-project.org/](http://www.r-project.org/)
+2. Download, Packages > CRAN > Sweden > Swedish University Computer Network
+3. Välj ditt operativsystem, ladda ned och installera R
+
+## R-Studio
+1. Gå till [http://www.rstudio.com/](http://www.rstudio.com/)
+2. Powerful IDE for R > Download now > Download RStudio Desktop
+3. Välj ditt operativsystem, ladda ned och installera R-Studio
+
