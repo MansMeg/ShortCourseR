@@ -6139,6 +6139,9 @@ Introduktion till funktioner i R
 \begin_layout Standard
 Funktioner i R beter sig på samma sätt som funktioner inom matematik och
  del flesta programspråk.
+ En funktion skapar en egen miljö där den gör beräkningar, sedan returnerar
+ den värdet till den miljö som anropade funktionen (vanligtvis den Globala
+ miljön).
  En funktion i R består av ett antal delar:
 \end_layout
 
@@ -6650,554 +6653,24 @@ f(x,y)=x^{2}+y^{2}+z^{2}-1
 
 \end_layout
 
-\begin_layout Enumerate
-Vilken är den fria variabeln? Studera funktionen på följande sätt:
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-<<eval=FALSE,echo=TRUE>>=
-\end_layout
-
-\begin_layout Plain Layout
-
-f
-\end_layout
-
-\begin_layout Plain Layout
-
-@
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Enumerate
-Skapa funktionen igen men gör det med en enda rad kod utan 
-\family typewriter
-{}
-\family default
- eller 
-\family typewriter
-return()
-\family default
-.
-\end_layout
-
-\begin_layout Enumerate
-Pröva lite olika värden på 
-\family typewriter
-x
-\family default
- och 
-\family typewriter
-y
-\family default
-.
- Pröva att använda argumentnamnen och byt ordning på 
-\family typewriter
-x
-\family default
- och 
-\family typewriter
-y
-\family default
- i funktionsanropet.
- Eftersom 
-\family typewriter
-z
-\family default
- inte är definierad, kommer funktionen inte fungera om du inte sätter 
-\family typewriter
-z
-\family default
- till något värde.
- Pröva funktionen både före och efter du satt 
-\family typewriter
-z
-\family default
- till ett godtyckligt värde.
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-<<eval=FALSE,echo=TRUE>>=
-\end_layout
-
-\begin_layout Plain Layout
-
-f
-\end_layout
-
-\begin_layout Plain Layout
-
-@
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Enumerate
-Pröva nu att beräkna följande integral.
- Börja med att definiera funktionen och använd sedan funktionen 
-\family typewriter
-integrate()
-\family default
-.
-\begin_inset Formula 
-\[
-\int_{0}^{3}\frac{1}{3}x^{2}dx
-\]
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Enumerate
-Pröva nu att integrera en exponentialfördelnings täthetsfunktion med 
-\begin_inset Formula $E(X)=1$
-\end_inset
-
- mellan 0 och 1:
-\begin_inset Formula 
-\[
-\int_{0}^{1}f_{X}(x)dx
-\]
-
-\end_inset
-
-D.v.s.
- vilken sannolikhetsmassa finns mellan 0 och en exponentialfördelnings medelvärd
-e.
- 
-\series bold
-\color blue
-
-\begin_inset CommandInset href
-LatexCommand href
-name "Här"
-target "http://en.wikipedia.org/wiki/Exponential_distribution"
-
-\end_inset
-
-
-\series default
-\color inherit
- finns exponentialfördelningens täthetsfunktion.
- 
-\series bold
-Obs!
-\series default
- 
-\begin_inset Formula $E(X)=\frac{1}{\lambda}$
-\end_inset
-
-
-\end_layout
-
-\begin_layout Enumerate
-Gör om uppgift oven, men använd lägg till argumentet 
-\family typewriter
-lambda
-\family default
- i funktionen som integreras.
- Sätt argumentet 
-\family typewriter
-lambda
-\family default
- till 1 som standard.
- Prova om du får samma resultat som ovan.
- 
-\end_layout
-
-\begin_layout Enumerate
-Pröva att använda din nya genom att numeriskt integrera följande funktion
- där 
-\begin_inset Formula $f_{X}(x)$
-\end_inset
-
- är en exponentialfunktion med 
-\begin_inset Formula $E(X)=5$
-\end_inset
-
-.
- I funktionen 
-\family typewriter
-integrate()
-\family default
- finns 
-\family typewriter
-...
-
-\family default
- för godtyckliga argument som ska skickas till din funktion.
- Pröva att på så sätt ändra värdet på 
-\family typewriter
-lambda
-\family default
- när du integrerar numeriskt.
-\begin_inset Formula 
-\[
-\int_{0}^{5}f_{X}(x)dx
-\]
-
-\end_inset
-
-
-\end_layout
-
 \begin_layout Subsection
-Globala och lokala miljöer i R
+Fria variabler
 \end_layout
 
-\begin_layout Enumerate
-Skapa följande funktion och pröva denna kod: 
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-<<eval=FALSE,echo=TRUE>>=
-\end_layout
-
-\begin_layout Plain Layout
-
-c <- function(x,y){
-\end_layout
-
-\begin_layout Plain Layout
-
-	x + y
-\end_layout
-
-\begin_layout Plain Layout
-
-}
-\end_layout
-
-\begin_layout Plain Layout
-
-@
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Enumerate
-Den funktion vi brukar använda för att skapa vektorer kallas också 
-\family typewriter
-c()
-\family default
-.
- Vilken funktion är det som används om du anropar funktionen 
-\family typewriter
-c
-\family default
- nu? 
-\end_layout
-
-\begin_layout Enumerate
-R följer en given sökväg för när funktionen 
-\family typewriter
-c
-\family default
- anropas.
- Studera hur sökvägen ser ut med search().
- För att titta i vilken namespace den funktion du just skapat ligger pröva
- funktionen 
-\family typewriter
-environment()
-\family default
-.
- För att ta reda på var den gamla funktionen (för att skapa en vektor) ligger,
- titta i hjälpen efter 
-\family typewriter
-c
-\family default
-.
- Högst upp till vänster ska det stå i vilken namespace funktionen ligger.
- Är den namespace där din skapade funktion ligger tidigare i R:s sökväg
- än den gamla 
-\family typewriter
-c
-\family default
--funktionen?
-\end_layout
-
-\begin_layout Enumerate
-Pröva nu att anropa den gamla c-funktionen med hjälp av 
-\family typewriter
-::
-\family default
- direkt från den namespace den gamla funktionen 
-\family typewriter
-c
-\family default
- ligger i.
-\end_layout
-
-\begin_layout Enumerate
-Ta nu bort din 
-\family typewriter
-c
-\family default
- - funktion med 
-\family typewriter
-rm(c)
-\family default
-.
-\end_layout
-
-\begin_layout Enumerate
-Skapa nu följande funktionen nedan.
- Vilken variabel är en så kallad fri variabel?
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-<<eval=FALSE,echo=TRUE>>=
-\end_layout
-
-\begin_layout Plain Layout
-
-f <- function(x){
-\end_layout
-
-\begin_layout Plain Layout
-
-	(x + y)^2 - 1
-\end_layout
-
-\begin_layout Plain Layout
-
-}
-\end_layout
-
-\begin_layout Plain Layout
-
-@
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Enumerate
-Pröva först att använda funktionen utan att ge 
-\family typewriter
-y
-\family default
- ett värde (eller om den finns i global enviroment, ta bort den).
- Fungerar funktionen 
-\family typewriter
-f
-\family default
-? Pröva att ge variabeln 
-\family typewriter
-y
-\family default
- ett värde.
- Fungerar funktionen nu?
-\end_layout
-
-\begin_layout Enumerate
-R söker efter värden på fria variabler på samma sätt som R söker efter funktione
-r när ett funktionsnamn anropas.
- Dock påbörjar sökningen efter fria variabler i den miljö där funktionen
- är definierad.
- Skapa koden nedan, vad gör funktionen?
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-<<eval=FALSE,echo=TRUE>>=
-\end_layout
-
-\begin_layout Plain Layout
-
-y <- 5
-\end_layout
-
-\begin_layout Plain Layout
-
-g <- function(x){
-\end_layout
-
-\begin_layout Plain Layout
-
-  y <- 10
-\end_layout
-
-\begin_layout Plain Layout
-
-  # f here
-\end_layout
-
-\begin_layout Plain Layout
-
-  print(environment(f))
-\end_layout
-
-\begin_layout Plain Layout
-
-  output <- f(x)
-\end_layout
-
-\begin_layout Plain Layout
-
-  return(output)
-\end_layout
-
-\begin_layout Plain Layout
-
-} 
-\end_layout
-
-\begin_layout Plain Layout
-
-@
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Enumerate
-Pröva att istället definiera funktionen 
-\family typewriter
-f
-\family default
- inne i funktionen som markerats med en kommentar.
- Vad blir skillnaden om du nu kör 
-\family typewriter
-g()
-\family default
-?
-\end_layout
-
-\begin_layout Enumerate
-Prova att använda funktionen 
-\family typewriter
-assign()
-\family default
- för att göra följande operation:
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-<<eval=FALSE,echo=TRUE>>=
-\end_layout
-
-\begin_layout Plain Layout
-
-svar <- 42
-\end_layout
-
-\begin_layout Plain Layout
-
-@
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Enumerate
-Pröva att med 
-\family typewriter
-assign()
-\family default
- skapa variablerna 
-\family typewriter
-svar1
-\family default
-, 
-\family typewriter
-svar2
-\family default
-, 
-\family typewriter
-svar3
-\family default
-, ..., 
-\family typewriter
-svar10
-\family default
- med en 
-\family typewriter
-for
-\family default
- loop.
- Varje svar (1 till 10) ska vara 42.
-\end_layout
-
-\begin_layout Enumerate
-Vi ska nu skapa en funktion du kallar 
-\family typewriter
-minianalys()
-\family default
- som tar en godtycklig numerisk vektor och skriver ut vektorns medelvärde,
- standardavvikelse och kvantiler till skärmen.
- Pröva funktionen på vektorerna nedan: [
+\begin_layout Standard
+Är det så att en variabel används i en funktion men inte skapas i funktionen
+ är det en fri variabel.
+ I dessa fall kommer R söka efter denna variabel 
 \series bold
-Tips!
-\series default
- 
+i den miljö där funktionen skapades.
+\end_layout
+
+\begin_layout Enumerate
+Kör denna kod i R: Pröva lite olika värden på 
 \family typewriter
-quantile()
+frivar
 \family default
-] 
+.
 \begin_inset Newline newline
 \end_inset
 
@@ -7207,17 +6680,47 @@ status open
 
 \begin_layout Plain Layout
 
-<<eval=FALSE,echo=TRUE>>=
+<<eval=TRUE,echo=TRUE>>=
 \end_layout
 
 \begin_layout Plain Layout
 
-utanNA <- 1:100
+nyFun <- function(){
 \end_layout
 
 \begin_layout Plain Layout
 
-medNA <- c(rep(NA,10),11:100)
+a <- c(1, pi, pi^2)
+\end_layout
+
+\begin_layout Plain Layout
+
+b <- a + frivar 
+\end_layout
+
+\begin_layout Plain Layout
+
+return(b)
+\end_layout
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\begin_layout Plain Layout
+
+nyFun()
+\end_layout
+
+\begin_layout Plain Layout
+
+frivar <- 4
+\end_layout
+
+\begin_layout Plain Layout
+
+nyFun()
 \end_layout
 
 \begin_layout Plain Layout
@@ -7228,45 +6731,6 @@ medNA <- c(rep(NA,10),11:100)
 \end_inset
 
 
-\end_layout
-
-\begin_layout Enumerate
-Samtliga de funktioner inne i 
-\family typewriter
-minianalys()
-\family default
- kan ta argumentet na.rm för att rensa bort NA innan beräkningar görs.
- Använd ellipsis-argumentet 
-\family typewriter
-...
-
-\family default
- för att möjliggöra att 
-\begin_inset Quotes eld
-\end_inset
-
-skicka vidare
-\begin_inset Quotes erd
-\end_inset
-
- argumentet 
-\family typewriter
-na.rm
-\family default
- till funktionerna inne i 
-\family typewriter
-minianalys()
-\family default
-.
- Pröva sedan vektorerna ovan men med argumentet 
-\family typewriter
-na.rm = TRUE
-\family default
- i 
-\family typewriter
-minianalys()
-\family default
-.
 \end_layout
 
 \begin_layout Section
@@ -7283,8 +6747,9 @@ Vi ska nu använda så kallade de så kallade
 *apply
 \family default
 -funktionerna i R.
- Dessa funktioner används istället för loopar.
- De är ofta betydligt mycket snabbare att beräkna än loopar.
+ Dessa funktioner används istället för loopar och kallas ofta för higher
+ order functions.
+ De är ofta betydligt mycket snabbare än loopar.
  
 \end_layout
 
@@ -7525,8 +6990,11 @@ myList <- split(x = ChickWeight, f = ChickWeight$Diet)
 \end_layout
 
 \begin_layout Enumerate
-Räkna ut medelvärde, varians och percentiler för varje weight i varje element
- i 
+Räkna ut medelvärde, varians och percentiler för varje 
+\family typewriter
+weight
+\family default
+ i varje element i 
 \family typewriter
 myList
 \family default
@@ -7553,481 +7021,33 @@ lapply()
 \end_layout
 
 \begin_layout Chapter
-Generiska funktioner, klasser och objekt
-\end_layout
-
-\begin_layout Enumerate
-Testa att använda funktionerna nedan på några olika objekt från del 1 av
- labben.
- Vad får du för resultat?
-\end_layout
-
-\begin_deeper
-\begin_layout Enumerate
-
-\family typewriter
-is.vector()
-\end_layout
-
-\begin_layout Enumerate
-
-\family typewriter
-is.matrix()
-\end_layout
-
-\begin_layout Enumerate
-
-\family typewriter
-is.list()
-\end_layout
-
-\begin_layout Enumerate
-
-\family typewriter
-is.data.frame()
-\end_layout
-
-\end_deeper
-\begin_layout Enumerate
-Testa nu om du kan omvandla några av objekten från del 1 med funktionerna
- nedan:
-\end_layout
-
-\begin_deeper
-\begin_layout Enumerate
-
-\family typewriter
-as.vector()
-\end_layout
-
-\begin_layout Enumerate
-
-\family typewriter
-as.matrix()
-\end_layout
-
-\begin_layout Enumerate
-
-\family typewriter
-as.list()
-\end_layout
-
-\begin_layout Enumerate
-
-\family typewriter
-as.data.frame()
-\end_layout
-
-\begin_layout Enumerate
-
-\family typewriter
-unlist()
-\end_layout
-
-\end_deeper
-\begin_layout Enumerate
-Skapa objektet 
-\family typewriter
-testObj
-\family default
- enligt koden nedan.
- Undersök 
-\family typewriter
-testObj
-\family default
- med funktionerna 
-\family typewriter
-class()
-\family default
- och 
-\family typewriter
-attributes()
-\family default
-, Hur tolkar du resultatet från 
-\family typewriter
-attributes()
-\family default
-?
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-<< >>=
-\end_layout
-
-\begin_layout Plain Layout
-
-x<-seq(4,19,length=10) 
-\end_layout
-
-\begin_layout Plain Layout
-
-y<-seq(12,-20,length=10) 
-\end_layout
-
-\begin_layout Plain Layout
-
-z<-seq(1,95,length=10) 
-\end_layout
-
-\begin_layout Plain Layout
-
-testObj<-cbind(x,y,z) 
-\end_layout
-
-\begin_layout Plain Layout
-
-colnames(testObj)<-c("x","y","z") 
-\end_layout
-
-\begin_layout Plain Layout
-
-rownames(testObj)<-paste("Rad ",1:10)
-\end_layout
-
-\begin_layout Plain Layout
-
-@
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Enumerate
-Återvänd till tabellen 
-\family typewriter
-twoWayFreq
-\family default
- från uppgift 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "enu:Skapa-en-ny"
-
-\end_inset
-
- i första sektionen.
- Testa att använda funktionerna 
-\family typewriter
-str()
-\family default
-, 
-\family typewriter
-class()
-\family default
-, 
-\family typewriter
-dim()
-\family default
- och 
-\family typewriter
-attributes()
-\family default
- på 
-\family typewriter
-twoWayFreq
-\family default
-.
- Testa även 
-\family typewriter
-colnames()
-\family default
- och 
-\family typewriter
-rownames()
-\family default
-.
- Vad får du för resultat?
-\end_layout
-
-\begin_layout Enumerate
-
-\family typewriter
-plot()
-\family default
- är en generisk funktion i R.
- Detta innebär att den gör olika saker med olika typer av objekt.
- 
-\end_layout
-
-\begin_deeper
-\begin_layout Enumerate
-Testa att köra koden nedan.
- Vad får du för resultat i de olika fallen? 
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-<<eval=FALSE >>=
-\end_layout
-
-\begin_layout Plain Layout
-
-plot(x)
-\end_layout
-
-\begin_layout Plain Layout
-
-plot(testObj)
-\end_layout
-
-\begin_layout Plain Layout
-
-myData<-as.data.frame(testObj)
-\end_layout
-
-\begin_layout Plain Layout
-
-plot(myData)
-\end_layout
-
-\begin_layout Plain Layout
-
-@
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Enumerate
-Testa att använda 
-\family typewriter
-class()
-\family default
- på 
-\family typewriter
-x
-\family default
-, 
-\family typewriter
-testObj
-\family default
- och 
-\family typewriter
-myData
-\family default
-.
- Testa att köra 
-\family typewriter
-methods(plot)
-\family default
-.
-\end_layout
-
-\end_deeper
-\begin_layout Enumerate
-En annan generisk funktion är 
-\family typewriter
-summary()
-\family default
-.
- Den kan ge mycket olika resultat beroende på objekt.
- Testa koden nedan.
- Vad händer i de olika fallen? Testa att köra 
-\family typewriter
-class()
-\family default
- på de olika objekten.
- 
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-<<eval=FALSE >>=
-\end_layout
-
-\begin_layout Plain Layout
-
-myGraph<-hist(appleClose)
-\end_layout
-
-\begin_layout Plain Layout
-
-summary(testObj)
-\end_layout
-
-\begin_layout Plain Layout
-
-summary(del1) 
-\end_layout
-
-\begin_layout Plain Layout
-
-summary(twoWayFreq)
-\end_layout
-
-\begin_layout Plain Layout
-
-summary(myGraph)
-\end_layout
-
-\begin_layout Plain Layout
-
-# testa även:
-\end_layout
-
-\begin_layout Plain Layout
-
-str(myGraph)
-\end_layout
-
-\begin_layout Plain Layout
-
-@
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Enumerate
-I fallet 
-\family typewriter
-summary(twoWayFreq)
-\family default
- så används 
-\family typewriter
-summary()
-\family default
- på ett objekt av klassen table.
- Ta reda på vilka olika varianter av summary det finns med hjälp av methods().
- Vad heter funktionen som används om ett objekt är av klassen table? Hitta
- hjälpavsnitt som ger förklaringen till resultatet av 
-\family typewriter
-summary(twoWayFreq)
-\family default
-.
- Tips: Det står under avsnittet 
-\begin_inset Quotes eld
-\end_inset
-
-Value
-\begin_inset Quotes erd
-\end_inset
-
-.
- 
-\end_layout
-
-\begin_layout Enumerate
-Testa att köra 
-\family typewriter
-as.data.frame()
-\family default
- på ett objekt av klassen table.
- Vad händer?
-\end_layout
-
-\begin_layout Chapter
 R-paket 
 \end_layout
 
-\begin_layout Enumerate
-\begin_inset CommandInset label
-LatexCommand label
-name "enu:Lista-alla-R-paket"
-
-\end_inset
-
-Lista alla R-paket som finns installerade på din dator.
+\begin_layout Standard
+R-paket är extra moduler/biblitek som läses in i R för att skapa extra funktiona
+litet.
+ Det mesta som görs i R görs genom olika paket.
 \end_layout
 
 \begin_layout Enumerate
-Lista samtliga R-paket som är inlästa i din R-session.
-\end_layout
-
-\begin_layout Enumerate
-Ladda in paketet 
+Först måste ett R-paket installeras.
+ Detta kan antingen göras genom CRAN (Comprehensive R Archive Network) där
+ de flesta paket ligger uppe.
+ Detta görs med funktionen 
 \family typewriter
-stringr
+install.packages()
 \family default
 .
- 
-\end_layout
-
-\begin_layout Enumerate
-Använd 
-\family typewriter
-help.search(
-\begin_inset Quotes eld
-\end_inset
-
-stringr
-\begin_inset Quotes erd
-\end_inset
-
-)
-\family default
- för att hitta generell information om paketet.
- Leta reda att på den funktion som används för att räkna ut längden på en
- sträng (i antalet tecken).
- 
-\end_layout
-
-\begin_layout Enumerate
-Använd 
-\family typewriter
-example()
-\family default
- för att köra exemplen för denna funktion.
- 
-\end_layout
-
-\begin_layout Enumerate
-Ta bort paketet 
+ Pröva att installera 
 \family typewriter
 stringr
 \family default
- från R:s minne.
- 
-\end_layout
-
-\begin_layout Enumerate
-Skapa funktionen 
+ och 
 \family typewriter
-mad()
+lubrudate
 \family default
- enligt koden nedan.
- Kör funktionen så den finns i R:s minne.
- Kontrollera att funktionen är inäst med funktionen 
-\family typewriter
-ls()
-\family default
-.
- Det finns en annan funktion med samma namn sedan tidigare i paketet 
-\family typewriter
-stats
-\family default
- som beräknar “median absolute deviation”.
- Paketet i 
-\family typewriter
-stats
-\family default
- laddas alltid automatiskt in när R startas.
- Hur kan du anropa funktionen 
-\family typewriter
-mad()
-\family default
- i stats-paketet utan att döpa om eller ta bort din tidigare funktion? 
+ på detta sätt.
 \begin_inset Newline newline
 \end_inset
 
@@ -8042,27 +7062,12 @@ status open
 
 \begin_layout Plain Layout
 
-mad<-function(x){ 
+install.packages("stringr")
 \end_layout
 
 \begin_layout Plain Layout
 
-print("Detta är min mad-funtion") 
-\end_layout
-
-\begin_layout Plain Layout
-
-y<-sum(abs(x-median(x)))  
-\end_layout
-
-\begin_layout Plain Layout
-
-return(y)
-\end_layout
-
-\begin_layout Plain Layout
-
-}
+install.packages("lubridate")
 \end_layout
 
 \begin_layout Plain Layout
@@ -8076,61 +7081,94 @@ return(y)
 \end_layout
 
 \begin_layout Enumerate
-Med funktionen 
+För att läsa in ett paket (för att använda det) används 
 \family typewriter
 library()
 \family default
- är det bara möjligt att ladda in ett R-paket i R åt gången.
- Du vill skapa en funktion som kan läsa in flera R-paket direkt.
- Skapa en funktion som heter
-\family typewriter
- CheckAndLoad()
-\family default
 .
- Denna funktion ska kunna ta en character-vector med paketnamn (ex.
- 
-\family typewriter
-c(‘‘stringr’’,’’lubridate’’)
-\family default
-) som argument.
- För varje textelement (eller paketnamn) ska funktionen undersöka om paketet
- finns installerat [Tips! Se uppgift 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "enu:Lista-alla-R-paket"
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+<<eval=FALSE>>=
+\end_layout
+
+\begin_layout Plain Layout
+
+library(stringr)
+\end_layout
+
+\begin_layout Plain Layout
+
+@
+\end_layout
 
 \end_inset
 
- ].
- Om paketet finns installerat ska funktionen ladda in paketet i R och skriva
- ut texten “R-Paketet [namnet på paketet] är nu inläst.” till skärmen.
- Om paketet inte finns installerat i R ska funktionen skriva ut “R-paketet
- [namnet på paketet] är tyvärr inte installerat och kan inte läsas in.” [Tips!
-\family typewriter
- paste()
-\family default
- eller
-\family typewriter
- str_c()
-\family default
- i stingr-paketet] 
+
 \end_layout
 
 \begin_layout Enumerate
-Om du har egen dator: Testa att installera paketen 
+Ett annat ställe där vi kan installera paket från är från github.
+ Detta är vanligt för paket som fortfarande utvecklas.
+ För att installera från Github behöver först paketet 
 \family typewriter
-stringr
+devtools
 \family default
- och 
+ installeras.
+ Pröva att installera paketet 
 \family typewriter
-lubridate
+sweSCB
 \family default
- på din egna dator med 
+ på detta sätt med följande kod.
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+<<eval=FALSE>>=
+\end_layout
+
+\begin_layout Plain Layout
+
+install.packages("devtools") 
+\end_layout
+
+\begin_layout Plain Layout
+
+devtools::install_github("sweSCB","LCHansson") 
+\end_layout
+
+\begin_layout Plain Layout
+
+library(sweSCB)
+\end_layout
+
+\begin_layout Plain Layout
+
+@
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+För att ta bort ett paket från R används 
 \family typewriter
-install.packages()
+detatch()
 \family default
 .
- 
 \end_layout
 
 \begin_layout Part
